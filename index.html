@@ -342,7 +342,6 @@
 <li>name 表示创建的chunk的指定名字，如果未指定则用id作为name，即后面会提到的<code>chunkName</code></li>
 <li>chunkhash 是文件的 hash 码，用来保证文件的唯一性，这里使用前八位（前几位可随意选取）</li>
 </ul>
-<p>如此一来，会降低页面的加载速度。因此，检查页面中的坏链接非常有必要，你可以通过 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google的PageSpeed工具</a> 来检测，找到问题后，补充相应的资源文件或者修改资源的链接地址即可。</p>
 <h4 id="结合react-router"><a href="#结合react-router" class="headerlink" title="结合react-router"></a>结合react-router</h4><p>Route 可以定义 getChildRoutes，getIndexRoute 和 getComponent 这几个函数。它们都是异步执行，并且只有在需要时才被调用。我们将这种方式称之为 “逐渐匹配”。 React Router 会逐渐的匹配 URL 并只加载该 URL 对应页面所需的路径配置和组件。所以我们需要将原本Route组件的component属性换成getComponent以此来运行我们的关键函数。</p>
 <h5 id="path"><a href="#path" class="headerlink" title="path"></a>path</h5><p>将匹配的路由，也就是以前的 path。</p>
 <h5 id="getComponent"><a href="#getComponent" class="headerlink" title="getComponent"></a>getComponent</h5><p>对应 component 属性，但是这个方法是异步的，也就是当路由匹配时，才会调用这个方法。<br>这里面有个 <code>require.ensure</code> 方法</p>
