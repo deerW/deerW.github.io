@@ -259,6 +259,512 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/28/styled-components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deer Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeerW's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/28/styled-components/" itemprop="url">
+                  styled-components
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T16:35:44+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>为了应对越来越复杂的web应用，组件化应运而生，React、Vue等组件化框架使我们的程序更简单更加可维护。Css 在 React 中的写法一直在持续改进，从原生的 Css 到 CSS Modules，再到 Css In Js，目标是让开发者更高效地写组件的样式。在一个组件内会将结构、样式和逻辑写在一起，虽然这违背了关注点分离的原则，但是这有利于组件间的隔离。为了顺应组件化的潮流，人们开始考虑使用Css In Js，styled components就是其中一种解决方案。styled components是一个React第三方库，作用是可以将样式写成组件的形式，实现在JS上编写CSS。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save styled-components</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>使用过 React 的同学可能比较清楚，如果要在一个组件通过 JS 来定义 css 样式，就必须在 React 组件里面通过style属性来写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Home = <span class="function"><span class="params">()</span> =&gt;</span> &lt;div style=&#123;&#123; <span class="attr">marginLeft</span>: <span class="number">10</span> &#125;&#125;&gt;Hello World&lt;<span class="regexp">/div&gt;;</span></div></pre></td></tr></table></figure>
+<p>这种方式有很多<code>缺点</code>：</p>
+<ul>
+<li><p>样式属性与原生 css 的写法不一致，样式名称必须用驼峰的命名方式来命令，而不是多个单词用<code>-</code>号分隔；属性值必须用引号包起来</p>
+</li>
+<li><p>无法写伪元素，要实现hover的话就必须使用onMouseOver事件来实现，而且要写很多 JS 代码，像before和after这类伪元素则根本没法通过这种方式实现。</p>
+</li>
+</ul>
+<p><code>styled-components</code> 最吸引开发者的是使用了 ES6 的字符串模板方式来定义 css 样式，这样使得 css 的写法与原生的 css 写法基本一致，克服了上述的缺点。</p>
+<p>关于 Styled Components 我们需要理解的最主要的事情就是其名称应该采取字面意思。不再根据他们的 Class 或者 HTML 元素来对 HTML 元素或组件进行样式化了。</p>
+<p>我们目前使用的样式表写法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;h1 className="title"&gt;Hello World&lt;/h1&gt;</div><div class="line"></div><div class="line">h1.title &#123;</div><div class="line">  font-size: 1.5em;</div><div class="line">  color: purple;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但现在，我们可以定义一个拥有它们自己的封装风格的 styled Components。然后我们就可以在自己的代码中自由的使用它们了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-components'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Title = styled.h1<span class="string">`</span></div><div class="line">  font-size: 1.5em;</div><div class="line">  color: purple;</div><div class="line">`;</div><div class="line"></div><div class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;Title primary&gt;Hello World&lt;/Title&gt;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</div></pre></td></tr></table></figure>
+<p>实现结果如下：</p>
+<p><img src="../images/styled_01.jpeg" alt=""></p>
+<p>这两段代码看起来有一些细微的差别，事实上两者语法是非常相似的。但是它们的关键区别在于样式现在是这些组件的一部分。换句话说，我们正在摆脱 CSS class 作为组件和其样式的中间步骤这种情况。</p>
+<p>styled-components 的联合创造者 Max Stoiber 说：</p>
+<p><code>styled-components 的基本思想就是通过移除样式和组件之间的映射关系来达到最佳实践。</code></p>
+<p>styled.h1函数返回一个React Component，styled components会为这个React Component添加一个class，该class的值为一个随机字符串。传给styled.h1的模板字符串参数的值实际上是CSS语法，这些CSS会附加到该React Component的class中，从而为React Component添加样式：</p>
+<p><img src="../images/styled_02.jpeg" alt=""></p>
+<p>这样也可以更好的解决Css全局作用域若命名重复导致样式被遮盖的问题，但需要注意的是，不推荐在styled components中使用嵌套，因为样式组件的子组件的className不会被编译成随机值，这些子组件的类还是会受CSS的全局作用域影响。</p>
+<h4 id="更简单地控制样式-——-props参数"><a href="#更简单地控制样式-——-props参数" class="headerlink" title="更简单地控制样式 —— props参数"></a>更简单地控制样式 —— props参数</h4><p>在React中是通过控制className和style来控制样式的，如下例，Title组件需要判断是否有primary属性来判断是否渲染”title-primary”类的样式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Title</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">const</span> className = <span class="string">`title<span class="subst">$&#123;<span class="keyword">this</span>.props.primary ? <span class="string">' title-primary'</span> : <span class="string">''</span>&#125;</span>`</span>;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div className=&#123;className&#125;&gt;&#123;this.props.children&#125;&lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>styled components使用props来控制样式，将控制样式代码放在样式组件中，使React组件更加简洁：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">const</span> Title = styled.h1<span class="string">`</span></div><div class="line">  font-size: 1.5em;</div><div class="line">  color: <span class="subst">$&#123;props =&gt; props.primary ? <span class="string">'blue'</span> : <span class="string">'purple'</span>&#125;</span>;</div><div class="line">`;</div><div class="line"></div><div class="line">&lt;Title primary&gt;Hello World&lt;/Title&gt;</div></pre></td></tr></table></figure>
+<p>上面两种写法非常相似，实际上还是要用CSS的语法编写样式。但是第一种写法需要className或style作为“中间人”使JS找到对应的样式，而styled components的写法中样式组件暴露props让外层JS来控制样式，不再需要className或style这样的“中间人”，移除了样式和组件间的映射关系。</p>
+<p>而且，styled-components 的 CSS 仍然还是 CSS。所以像下面这样的代码也是完全有效的（尽管略微不常用）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">const</span> Title = styled.h1<span class="string">`</span></div><div class="line">  font-size: 1.5em;</div><div class="line">  color: purple;</div><div class="line"></div><div class="line">  &amp;.primary&#123;</div><div class="line">    color: blue;</div><div class="line">  &#125;</div><div class="line">`;</div><div class="line"></div><div class="line">&lt;Title className="primary"&gt;Hello World&lt;/Title&gt; <span class="comment">// will be blue</span></div></pre></td></tr></table></figure>
+<p>这是让 styled-components 很容易就被接受的一个特性：当存在疑惑时，我们总是可以倒退回你所熟悉的领域。</p>
+<h4 id="Extending-Styles"><a href="#Extending-Styles" class="headerlink" title="Extending Styles"></a>Extending Styles</h4><p>继承一个组件的样式，并进行扩展<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">const Title = styled.h1`</div><div class="line">  font-size: 1.5em;</div><div class="line">  color: purple;</div><div class="line">`;</div><div class="line"></div><div class="line">const TomatoTitle = Title.extend`</div><div class="line">  color: tomato;</div><div class="line">  font-size: 2em;</div><div class="line">`;</div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">Title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">Title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">TomatoTitle</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">TomatoTitle</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="theme特性"><a href="#theme特性" class="headerlink" title="theme特性"></a>theme特性</h4><p>styled-components 里面还有一个比较特别的特性是theme，它利用了 React 的context特性来传递其中的参数，可以让样式对象直接从最上层的组件传递到最下层的组件。<br>将<code>theme</code>通过<code>ThemeProvider</code>（这也是 <code>styled-components</code> 的一个 API）这样下层组件就可以通过”props.theme”来引用其中的样式了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 首先定义一个`theme`样式对象</span></div><div class="line"><span class="keyword">const</span> styleGuide = &#123;</div><div class="line">  <span class="attr">cloudy</span>: <span class="string">'#F2F4F7'</span>,</div><div class="line">  <span class="attr">darkGray</span>: <span class="string">'#4A637C'</span>,</div><div class="line">  <span class="attr">gray</span>: <span class="string">'#7A8D9F'</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">return</span> (</div><div class="line">  &lt;ThemeProvider theme=&#123;styleGuide&#125;&gt;</div><div class="line">    &lt;Route path="/login" component=&#123;LoginView&#125; /&gt;</div><div class="line">    &lt;Route path="/logout" component=&#123;LogoutView&#125; /&gt;</div><div class="line">  &lt;/ThemeProvider&gt;</div><div class="line">);</div><div class="line"></div><div class="line">// 定义button, 并且使用props.theme</div><div class="line">const Button = styled.button`</div><div class="line">  font-size: 1em;</div><div class="line">  margin: 1em;</div><div class="line">  padding: 0.25em 1em;</div><div class="line">  border-radius: 3px;</div><div class="line">  /* Color the border and text with theme properties */</div><div class="line">  color: $&#123;props =&gt; props.theme.darkGray&#125;;</div><div class="line">  border: 2px solid $&#123;props =&gt; props.theme.darkGray&#125;;</div><div class="line">`;</div></pre></td></tr></table></figure>
+<h4 id="支持全部CSS特性"><a href="#支持全部CSS特性" class="headerlink" title="支持全部CSS特性"></a>支持全部CSS特性</h4><p>实际上styled components使用的还是CSS，因此完美支持CSS的所有特性。伪类，媒体查询，keyframes都可以在styled components中实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styled, &#123; keyframes &#125; <span class="keyword">from</span> <span class="string">'styled-components'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Title = styled.h1<span class="string">`</span></div><div class="line">    font-size: 1.5em;</div><div class="line">    text-align: center;</div><div class="line">    color: palevioletred;</div><div class="line"></div><div class="line">    &amp;:hover &#123;</div><div class="line">        background-color: #ddd;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @media (max-width: 650px) &#123;</div><div class="line">        font-size: 1em;</div><div class="line">    &#125;</div><div class="line">`;</div><div class="line"><span class="keyword">const</span> rotate360 = keyframes<span class="string">`</span></div><div class="line">  from &#123;</div><div class="line">    transform: rotate(0deg);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  to &#123;</div><div class="line">    transform: rotate(360deg);</div><div class="line">  &#125;</div><div class="line">`;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Rotate = styled.div<span class="string">`</span></div><div class="line">  display: inline-block;</div><div class="line">  animation: <span class="subst">$&#123;rotate360&#125;</span> 2s linear infinite;</div><div class="line">`;</div></pre></td></tr></table></figure>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>styled components一种全新的控制样式的编程方式，它能解决CSS全局作用域的问题，而且移除了样式和组件间的映射关系。将组件的内容都写在一个js文件中，更有利于维护，这是一个趋势，他的更多优势还需要更多的实践。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/create-react-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deer Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeerW's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/22/create-react-app/" itemprop="url">
+                  Create React App
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T14:23:54+08:00">
+                2017-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install -g create-react-app</div><div class="line"></div><div class="line">create-react-app my-app</div><div class="line"><span class="built_in">cd</span> my-app/</div><div class="line">npm start</div></pre></td></tr></table></figure>
+<h3 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h3><p><img src="../images/react_app_01.jpeg" alt=""></p>
+<ul>
+<li><p>对于要构建的项目，这些文件必须存在精确的文件名：</p>
+<ul>
+<li>public/index.html 是页面模板;</li>
+<li>src/index.js 是JavaScript入口点。  </li>
+</ul>
+</li>
+<li><p>可以删除或重命名其他文件。</p>
+</li>
+<li><p>你可以在里面创建子目录src。对于更快的重建，只有内部src的文件才能被Webpack处理。</p>
+</li>
+<li><p>你需要把所需要的JS和CSS文件放在里面src，否则Webpack不会看到它们。</p>
+</li>
+<li><p>只能使用public里面的public/index.html文件。</p>
+</li>
+<li><p>但是，可以创建更多的顶级目录。它们不会被包含在生产构建中，因此您可以将它们用于文档。</p>
+</li>
+</ul>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>创建React应用程序分为两个包：</p>
+<ul>
+<li>create-react-app 是用于创建新项目的全局命令行实用程序。</li>
+<li>react-scripts 是生成项目的开发依赖（包括这个）。<br>你几乎不需要更新create-react-app自己：它将所有的设置委托给react-scripts。</li>
+</ul>
+<p>当您运行时create-react-app，它始终使用最新版本创建项目，react-scripts以便您自动获得新创建的应用程序的所有新功能和改进。</p>
+<p>要将现有项目更新到新版本react-scripts，请打开更改日志，找到您当前的版本（package.json如果您不确定，请选中此文件夹），并应用较新版本的迁移说明。</p>
+<h3 id="支持脚本"><a href="#支持脚本" class="headerlink" title="支持脚本"></a>支持脚本</h3><ul>
+<li><code>npm start</code> or <code>yarn start</code>  在开发模式下运行应用程序</li>
+<li><code>npm test</code> or <code>yarn test</code></li>
+<li><code>npm run build</code> or <code>yarn build</code> 将应用程序生成到build文件夹 它在生产模式下正确地捆绑了React，并优化了构建以获得最佳性能。构建被缩小，文件名包括散列。</li>
+<li><p><code>npm run eject</code></p>
+<ul>
+<li><p>运行后项目目录改变结构：<br><img src="../images/react_app_02.jpeg" alt=""></p>
+</li>
+<li><p>注意：这是单向操作。一旦你eject，你不能回去！</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="支持的语言功能"><a href="#支持的语言功能" class="headerlink" title="支持的语言功能"></a>支持的语言功能</h3><ul>
+<li>ES6</li>
+<li>指数运算符（ES2016）。</li>
+<li>异步/等待（ES2017）。</li>
+<li>对象休息/传播属性（第3阶段提案）。</li>
+<li>动态导入（）（第3阶段提案）</li>
+<li>类字段和静态属性（第2阶段提案）。</li>
+<li>JSX和Flow语法。</li>
+</ul>
+<h4 id="在编辑器中调试"><a href="#在编辑器中调试" class="headerlink" title="在编辑器中调试"></a>在编辑器中调试</h4><p>一些编辑器，包括Sublime Text，Atom和Visual Studio代码，为ESLint提供插件。</p>
+<p>它们不需要进行棉绒。您应该在终端以及浏览器控制台中看到输出输出。但是，如果您喜欢在编辑器中显示lint结果，则可以执行一些额外的步骤。</p>
+<p>您需要先为编辑器安装ESLint插件。然后，添加一个调用.eslintrc到项目根目录的文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   “ extend ”： “ react-app ”</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a>代码分割</h3><p>用户可以使用代码分割，而不是下载整个应用程序，您可以将代码拆分成小块，然后可以按需加载。</p>
+<p>此项目设置支持通过动态import()代码分割。类似import()函数的表单将模块名称作为参数，并返回一个Promise始终解析为模块的命名空间对象。</p>
+<h3 id="添加样式变和图像、字体、文件"><a href="#添加样式变和图像、字体、文件" class="headerlink" title="添加样式变和图像、字体、文件"></a>添加样式变和图像、字体、文件</h3><p>使用Webpack，使用静态资源（如图像和字体）与CSS类似。您可在JavaScript模块中使用import。这告诉Webpack将该文件包含在包中。</p>
+<p>为了减少对服务器的请求数量，导入小于10,000字节的映像返回数据URI而不是路径。这适用于以下文件扩展名：bmp，gif，jpg，jpeg和png。</p>
+<p>###</p>
+<p>通常鼓励您使用importJavaScript文件中的资源。例如，请参阅添加样式表和添加图像和字体的部分。这种机制提供了许多好处：</p>
+<ul>
+<li>将脚本和样式表缩小并捆绑在一起，以避免额外的网络请求。</li>
+<li>缺少的文件导致编译错误，而不是用户的404错误。</li>
+<li>结果文件名包括内容哈希，所以你不需要担心他们的旧版本的浏览器缓存。</li>
+</ul>
+<p>但是，有一个可用于在模块系统外部添加资产的逃生舱口。</p>
+<p>如果将文件放入public文件夹，则不会被Webpack处理。相反，它将被复制到构建文件夹中。要引用public文件夹中的资产，您需要使用一个特殊的变量PUBLIC_URL。</p>
+<p>在里面index.html，你可以这样使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=<span class="string">"shortcut icon"</span> href=<span class="string">"%PUBLIC_URL%/favicon.ico"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>这种方法的缺点：</p>
+<ul>
+<li>文件public夹中的任何文件都不能进行后处理或缩小。</li>
+<li>在编译时不会调用缺少的文件，并为用户造成404错误。</li>
+<li>结果文件名不会包含内容哈希，因此您需要添加查询参数或每次更改时重命名它们。</li>
+</ul>
+<h3 id="添加Flow"><a href="#添加Flow" class="headerlink" title="添加Flow"></a>添加Flow</h3><p>Flow是一种静态类型检查器，可帮助您编写更少错误的代码。</p>
+<p>要将流添加到创建应答应用程序项目，请按照下列步骤操作：</p>
+<ul>
+<li>运行<code>npm install --save-dev flow-bin</code>（或<code>yarn add --dev flow-bin</code>）。</li>
+<li>添加<code>&quot;flow&quot;: &quot;flow&quot;</code>到 <code>package.json</code> 的<code>scripts</code>部分。</li>
+<li>运行<code>npm run flow init</code>（或 <code>yarn flow init</code> ）在根目录中创建一个<code>.flowconfig</code>文件。</li>
+<li>添加 <code>// @flow</code> 到您要键入的任何文件检查（例如，到 <code>src/App.js</code> ）。</li>
+</ul>
+<h3 id="开发组件隔离"><a href="#开发组件隔离" class="headerlink" title="开发组件隔离"></a>开发组件隔离</h3><p>使用Storybook设置您的应用程序</p>
+<p>首先，在全球安装以下npm软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g @storybook/cli</div></pre></td></tr></table></figure>
+<p>然后，在应用程序的目录中运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getstorybook</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/HTML5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deer Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeerW's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/08/HTML5/" itemprop="url">
+                  HTML5新特性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T13:51:43+08:00">
+                2017-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>HTML5不仅仅是HEML规范的最新版本，它还是一系列用来制作现在富Web内容的相关技术的总称。其中包括最重要的三项技术是HTML5核心规范、CSS和JavaScript。</p>
+<h3 id="支持情况"><a href="#支持情况" class="headerlink" title="支持情况"></a>支持情况</h3><p>网站 ( <a href="http://caniuse.com/" target="_blank" rel="external">http://caniuse.com/</a> ) 上面提供了浏览器的智齿情况和采用率方面的详细信息，并且勤于修订。</p>
+<h3 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h3><h4 id="全局属性"><a href="#全局属性" class="headerlink" title="全局属性"></a>全局属性</h4><ul>
+<li><p>contenteditable 属性: 用途是让用户能够修改页面上的那内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;Example&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;p contenteditable=<span class="string">"true"</span>&gt;It is raining right now&lt;/p&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>属性效果如下：<br><img src="../images/h5_01.jpeg" alt=""><br><img src="../images/h5_02.jpeg" alt="">  </p>
+</li>
+<li><p>contextmeun 属性: 规定一个上下文菜单。该菜单会在用户右键点击该元素时出现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;Example&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">  &lt;div contextmenu=<span class="string">"mymenu"</span>&gt;右击我试试&lt;/div&gt;</div><div class="line"></div><div class="line">  &lt;menu <span class="built_in">type</span>=<span class="string">"context"</span> id=<span class="string">"mymenu"</span>&gt;</div><div class="line">    &lt;menuitem label=<span class="string">"菜单1"</span> onclick=<span class="string">"alert('这是菜单1');"</span> icon=<span class="string">"http://d.lanrentuku.com/down/gif/gif-0145.gif"</span>&gt;&lt;/menuitem&gt;</div><div class="line">    &lt;menuitem label=<span class="string">"菜单2"</span> onclick=<span class="string">"alert('这是菜单2');"</span> icon=<span class="string">"http://d.lanrentuku.com/down/gif/gif-0161.gif"</span>&gt;&lt;/menuitem&gt;</div><div class="line">    &lt;menu label=<span class="string">"菜单3"</span>&gt;</div><div class="line">      &lt;menuitem label=<span class="string">"菜单3-1"</span> icon=<span class="string">"http://d.lanrentuku.com/down/gif/gif-0184.gif"</span> onclick=<span class="string">"alert('这是菜单3-1');"</span>&gt;</div><div class="line">      &lt;/menuitem&gt;</div><div class="line">      &lt;menu label=<span class="string">"菜单3-2"</span> &gt;</div><div class="line">         &lt;menuitem label=<span class="string">"菜单3-2-1"</span> icon=<span class="string">"http://d.lanrentuku.com/down/gif/gif-0171.gif"</span> onclick=<span class="string">"alert('这是菜单3-2-1');"</span>&gt;</div><div class="line">         &lt;/menuitem&gt;</div><div class="line">      &lt;/menu&gt;</div><div class="line">    &lt;/menu&gt;</div><div class="line">  &lt;/menu&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>属性效果如下：<br><img src="../images/h5_03.jpeg" alt=""></p>
+<ul>
+<li>contextmenu 属性的值是需要打开的 <code>&lt;menu&gt;</code> 元素的 id。  </li>
+<li>目前只有 Firefox 浏览器支持 contextmenu 属性。  </li>
+</ul>
+</li>
+<li><p>draggable 属性：用来表示元素是否可被拖拽</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p draggable=<span class="string">"true"</span>&gt;This is a draggable paragraph.&lt;/p&gt;</div></pre></td></tr></table></figure>
+<p>效果如下：<br><img src="../images/h5_04.jpeg" alt=""></p>
+<ul>
+<li>只写 draggable 不起作用，需要使用 draggable=”true”</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/06/Webpack + react-router 按需加载/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -811,7 +1317,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -824,7 +1330,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
