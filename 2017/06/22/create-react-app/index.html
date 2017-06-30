@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="React,Create React App," />
+  <meta name="keywords" content="Create React App,React," />
 
 
 
@@ -97,19 +97,19 @@
 
 
 <meta name="description" content="创建项目12345npm install -g create-react-appcreate-react-app my-appcd my-app/npm start 项目目录  对于要构建的项目，这些文件必须存在精确的文件名：  public/index.html 是页面模板; src/index.js 是JavaScript入口点。     可以删除或重命名其他文件。  你可以在里面创建子目录s">
-<meta name="keywords" content="React,Create React App">
+<meta name="keywords" content="Create React App,React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Create React App">
 <meta property="og:url" content="http://yoursite.com/2017/06/22/create-react-app/index.html">
 <meta property="og:site_name" content="DeerW's Blog">
 <meta property="og:description" content="创建项目12345npm install -g create-react-appcreate-react-app my-appcd my-app/npm start 项目目录  对于要构建的项目，这些文件必须存在精确的文件名：  public/index.html 是页面模板; src/index.js 是JavaScript入口点。     可以删除或重命名其他文件。  你可以在里面创建子目录s">
-<meta property="og:image" content="http://yoursite.com/2017/06/22/images/react_app_01.jpeg">
-<meta property="og:image" content="http://yoursite.com/2017/06/22/images/react_app_02.jpeg">
-<meta property="og:updated_time" content="2017-06-27T07:05:58.000Z">
+<meta property="og:image" content="http://yoursite.com/images/react_app_01.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/react_app_02.jpeg">
+<meta property="og:updated_time" content="2017-06-30T03:16:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Create React App">
 <meta name="twitter:description" content="创建项目12345npm install -g create-react-appcreate-react-app my-appcd my-app/npm start 项目目录  对于要构建的项目，这些文件必须存在精确的文件名：  public/index.html 是页面模板; src/index.js 是JavaScript入口点。     可以删除或重命名其他文件。  你可以在里面创建子目录s">
-<meta name="twitter:image" content="http://yoursite.com/2017/06/22/images/react_app_01.jpeg">
+<meta name="twitter:image" content="http://yoursite.com/images/react_app_01.jpeg">
 
 
 
@@ -334,7 +334,7 @@
 
       
         <h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install -g create-react-app</div><div class="line"></div><div class="line">create-react-app my-app</div><div class="line"><span class="built_in">cd</span> my-app/</div><div class="line">npm start</div></pre></td></tr></table></figure>
-<h3 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h3><p><img src="../images/react_app_01.jpeg" alt=""></p>
+<h3 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h3><p><img src="/images/react_app_01.jpeg" alt=""></p>
 <ul>
 <li><p>对于要构建的项目，这些文件必须存在精确的文件名：</p>
 <ul>
@@ -366,7 +366,7 @@
 <li><code>npm run build</code> or <code>yarn build</code> 将应用程序生成到build文件夹 它在生产模式下正确地捆绑了React，并优化了构建以获得最佳性能。构建被缩小，文件名包括散列。</li>
 <li><p><code>npm run eject</code></p>
 <ul>
-<li><p>运行后项目目录改变结构：<br><img src="../images/react_app_02.jpeg" alt=""></p>
+<li><p>运行后项目目录改变结构：<br><img src="/images/react_app_02.jpeg" alt=""></p>
 </li>
 <li><p>注意：这是单向操作。一旦你eject，你不能回去！</p>
 </li>
@@ -385,7 +385,7 @@
 <h4 id="在编辑器中调试"><a href="#在编辑器中调试" class="headerlink" title="在编辑器中调试"></a>在编辑器中调试</h4><p>一些编辑器，包括Sublime Text，Atom和Visual Studio代码，为ESLint提供插件。</p>
 <p>它们不需要进行棉绒。您应该在终端以及浏览器控制台中看到输出输出。但是，如果您喜欢在编辑器中显示lint结果，则可以执行一些额外的步骤。</p>
 <p>您需要先为编辑器安装ESLint插件。然后，添加一个调用.eslintrc到项目根目录的文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   “ extend ”： “ react-app ”</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   <span class="string">"extend"</span>: <span class="string">"react-app"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a>代码分割</h3><p>用户可以使用代码分割，而不是下载整个应用程序，您可以将代码拆分成小块，然后可以按需加载。</p>
 <p>此项目设置支持通过动态import()代码分割。类似import()函数的表单将模块名称作为参数，并返回一个Promise始终解析为模块的命名空间对象。</p>
 <h3 id="添加样式变和图像、字体、文件"><a href="#添加样式变和图像、字体、文件" class="headerlink" title="添加样式变和图像、字体、文件"></a>添加样式变和图像、字体、文件</h3><p>使用Webpack，使用静态资源（如图像和字体）与CSS类似。您可在JavaScript模块中使用import。这告诉Webpack将该文件包含在包中。</p>
@@ -399,7 +399,7 @@
 </ul>
 <p>但是，有一个可用于在模块系统外部添加资产的逃生舱口。</p>
 <p>如果将文件放入public文件夹，则不会被Webpack处理。相反，它将被复制到构建文件夹中。要引用public文件夹中的资产，您需要使用一个特殊的变量PUBLIC_URL。</p>
-<p>在里面index.html，你可以这样使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=<span class="string">"shortcut icon"</span> href=<span class="string">"%PUBLIC_URL%/favicon.ico"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>在里面index.html，你可以这样使用：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"%PUBLIC_URL%/favicon.ico"</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>这种方法的缺点：</p>
 <ul>
 <li>文件public夹中的任何文件都不能进行后处理或缩小。</li>
@@ -448,9 +448,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
-          
             <a href="/tags/Create-React-App/" rel="tag"># Create React App</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       

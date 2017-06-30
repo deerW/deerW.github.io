@@ -103,13 +103,13 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/24/web前端优化及工具/index.html">
 <meta property="og:site_name" content="DeerW's Blog">
 <meta property="og:description" content="前端的性能对于一个Web应用来说非常重要，如果一个Web应用的页面加载速度非常快、对于用户的操作可以及时响应，那么产品的用户体验将会极大地提升。下图显示了页面加载速度对于用户体验的影响。  你的Web页面的速度是否已经足够快了？其实可能还有很多可以提升的地方。Google和雅虎也提出了一些Web应用的前端优化建议，并发布了一些工具，你可以逐一检验你的Web应用，以便达到更高的性能。 这些优化不仅仅">
-<meta property="og:image" content="http://yoursite.com/2017/04/24/images/web_01.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/04/24/images/defer.jpg">
-<meta property="og:updated_time" content="2017-04-26T02:22:43.000Z">
+<meta property="og:image" content="http://yoursite.com/images/web_01.jpg">
+<meta property="og:image" content="http://yoursite.com/images/defer.jpg">
+<meta property="og:updated_time" content="2017-06-30T03:14:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端优化最佳实践及工具">
 <meta name="twitter:description" content="前端的性能对于一个Web应用来说非常重要，如果一个Web应用的页面加载速度非常快、对于用户的操作可以及时响应，那么产品的用户体验将会极大地提升。下图显示了页面加载速度对于用户体验的影响。  你的Web页面的速度是否已经足够快了？其实可能还有很多可以提升的地方。Google和雅虎也提出了一些Web应用的前端优化建议，并发布了一些工具，你可以逐一检验你的Web应用，以便达到更高的性能。 这些优化不仅仅">
-<meta name="twitter:image" content="http://yoursite.com/2017/04/24/images/web_01.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/web_01.jpg">
 
 
 
@@ -334,7 +334,7 @@
 
       
         <p>前端的性能对于一个Web应用来说非常重要，如果一个Web应用的页面加载速度非常快、对于用户的操作可以及时响应，那么产品的用户体验将会极大地提升。下图显示了页面加载速度对于用户体验的影响。</p>
-<p><img src="../images/web_01.jpg" alt=""></p>
+<p><img src="/images/web_01.jpg" alt=""></p>
 <p>你的Web页面的速度是否已经足够快了？其实可能还有很多可以提升的地方。Google和雅虎也提出了一些Web应用的前端优化建议，并发布了一些工具，你可以逐一检验你的Web应用，以便达到更高的性能。</p>
 <p>这些优化不仅仅可以给用户提供更好的体验，从开发者角度来说，进行优化还可以减少页面的请求数、降低请求所占的带宽、减少资源的浪费。</p>
 <p>下面来看看Google和雅虎提供的Web页面优化最佳实践。</p>
@@ -352,9 +352,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=<span class="string">"style.css"</span> href=<span class="string">"style.css"</span> <span class="built_in">type</span>=<span class="string">"text/css"</span>&gt;</div></pre></td></tr></table></figure>
 <h4 id="避免使用document-write"><a href="#避免使用document-write" class="headerlink" title="避免使用document.write"></a>避免使用document.write</h4><p>在JavaScript中，可以使用 document.write在网页上显示内容或调用外部资源，而通过此方法，浏览器必须采取一些多余的步骤——下载资源、读取资源、运行JavaScript来了解需要做什么，调用其他资源时需要重新再执行一次这个过程。由于浏览器之前不知道要显示什么，所以会降低页面加载的速度。</p>
 <p>要知道，任何能够被document.write调用的资源，都可以通过HTML来调用，这样速度会更快。检查你的页面代码，如果存在类似于下面的代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.write(<span class="string">'&lt;script src="another.js"&gt;&lt;/script&gt;'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;script src="another.js"&gt;&lt;/script&gt;'</span>);</div></pre></td></tr></table></figure>
 <p>则建议你使用下面的代码来替代</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"another.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"another.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
 <h4 id="合并多个外部CSS文件"><a href="#合并多个外部CSS文件" class="headerlink" title="合并多个外部CSS文件"></a>合并多个外部CSS文件</h4><p>网站中每使用一个CSS文件，都会让你的页面加载速度慢一点点。如果你有一个以上的CSS文件，你应该将它们合并为一个文件。</p>
 <p>你可以通过 <a href="http://www.feedthebot.com/tools/css-delivery/" target="_blank" rel="external">CSS delivery工具</a> 来检测页面代码中的CSS文件，然后通过复制粘贴的方式将它们合并为一个。合并后记得修改页面中的引用代码，并删除旧的引用代码</p>
 <h4 id="合并多个外部JavaScript文件"><a href="#合并多个外部JavaScript文件" class="headerlink" title="合并多个外部JavaScript文件"></a>合并多个外部JavaScript文件</h4><p>大部分情况下，网站往往会包含若干个 JavaScript文件，但并不需要将这些文件都独立出来，其中有些是可以合并为一个文件的。</p>
@@ -363,19 +363,19 @@
 <p>CSS sprites需要有两个步骤：整合图像、定位图像。比如你可以通过下面的代码来分别定位下面图像中的上下两部分。</p>
 <h4 id="延迟JavaScript的加载"><a href="#延迟JavaScript的加载" class="headerlink" title="延迟JavaScript的加载"></a>延迟JavaScript的加载</h4><p>浏览器在执行JavaScript代码时会停止处理页面，当页面中有很多JavaScript文件或代码要加载时，将导致严重的延迟。尽管可以使用defer、异步或将JavaScript代码放到页面底部来延迟JavaScript的加载，但这些都不是一个好的解决方案。</p>
 <p>下面是Google的建议：</p>
-<pre><code class="bash">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;  
-<span class="keyword">function</span> <span class="function"><span class="title">downloadJSAtOnload</span></span>() {  
-  var element = document.createElement(<span class="string">"script"</span>);  
+<pre><code class="js">&lt;script type=<span class="string">"text/javascript"</span>&gt;  
+<span class="function"><span class="keyword">function</span> <span class="title">downloadJSAtOnload</span>(<span class="params"></span>) </span>{  
+  <span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);  
   element.src = <span class="string">"defer.js"</span>;  
-  document.body.appendChild(element);  
+  <span class="built_in">document</span>.body.appendChild(element);  
 }
-<span class="keyword">if</span> (window.addEventListener)  window.addEventListener(<span class="string">"load"</span>, downloadJSAtOnload, <span class="literal">false</span>);  
-<span class="keyword">else</span> <span class="keyword">if</span> (window.attachEvent)  window.attachEvent(<span class="string">"onload"</span>, downloadJSAtOnload);  
-<span class="keyword">else</span> window.onload = downloadJSAtOnload;  
-&lt;/script&gt;
+<span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener)  <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, downloadJSAtOnload, <span class="literal">false</span>);  
+<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.attachEvent)  <span class="built_in">window</span>.attachEvent(<span class="string">"onload"</span>, downloadJSAtOnload);  
+<span class="keyword">else</span> <span class="built_in">window</span>.onload = downloadJSAtOnload;  
+<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span>
 </code></pre>
 <p>这段代码的意思是等待页面加载完成后，然后再加载外部的“defer.js”文件。下面是测试结果。</p>
-<p><img src="../images/defer.jpg" alt=""></p>
+<p><img src="/images/defer.jpg" alt=""></p>
 <h4 id="启用压缩-GZIP"><a href="#启用压缩-GZIP" class="headerlink" title="启用压缩/ GZIP"></a>启用压缩/ GZIP</h4><p>使用gzip对HTML和CSS文件进行压缩，通常可以节省大约50％到70％的大小，这样加载页面只需要更少的带宽和更少的时间。</p>
 <p>你可以通过这个 <a href="http://www.feedthebot.com/tools/gzip/" target="_blank" rel="external">Gzip压缩工具</a> 来检测页面是否已经经过Gzip压缩。</p>
 <h4 id="启用Keep-Alive"><a href="#启用Keep-Alive" class="headerlink" title="启用Keep-Alive"></a>启用Keep-Alive</h4><p>HTTP协议采用“请求-应答”模式，当使用普通模式（非KeepAlive模式）时，每个请求/应答客户和服务器都要新建一个连接，完成之后立即断开连接（HTTP协议为无连接的协议）；当使用 Keep-Alive模式（又称持久连接、连接重用）时，Keep-Alive功能使客户端到服务器端的连接持续有效，当出现对服务器的后继请求时，Keep-Alive功能避免了建立或者重新建立连接。</p>
